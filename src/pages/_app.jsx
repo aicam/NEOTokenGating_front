@@ -6,7 +6,7 @@ import {
 import { Web3Modal } from "@web3modal/react";
 import { useEffect, useState } from "react";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { mainnet, optimism, polygon } from "wagmi/chains";
+import { polygonMumbai } from "wagmi/chains";
 import "../styles.css";
 
 // 1. Get projectID at https://cloud.walletconnect.com
@@ -16,7 +16,7 @@ if (!process.env.NEXT_PUBLIC_PROJECT_ID) {
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
 
 // 2. Configure wagmi client
-const chains = [mainnet, polygon, optimism];
+const chains = [polygonMumbai];
 
 const { publicClient } = configureChains(chains, [w3mProvider({ projectId })]);
 const wagmiConfig = createConfig({
@@ -35,6 +35,7 @@ export default function App({ Component, pageProps }) {
   useEffect(() => {
     setReady(true);
   }, []);
+
 
   return (
     <>
