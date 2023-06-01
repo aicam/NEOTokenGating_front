@@ -1,5 +1,4 @@
 import {Web3Button, Web3NetworkSwitch} from "@web3modal/react";
-import CustomButton from "../components/CustomButton";
 import {parseEther, parseGwei, recoverMessageAddress} from 'viem'
 import {usePrepareContractWrite, useContractWrite, useAccount} from 'wagmi'
 import Image from 'next/image'
