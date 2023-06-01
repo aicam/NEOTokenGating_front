@@ -1,0 +1,203 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+    user-select: none;
+}
+html, body {
+    background: #28334a;
+    min-height: 100vh;
+    min-width: 100vw;
+    font-family: -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
+}
+.feedback {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    opacity: 0;
+}
+.table {
+    display: table;
+    position: absolute;
+}
+.table-cell {
+    display: table-cell;
+    vertical-align: middle;
+}
+.ticket {
+    width: 98vw;
+    background: #fff;
+    justify-content: center;
+    align-content: center;
+    height: 100vh;
+}
+.ticket:after {
+    content: '';
+    display: block;
+    position: relative;
+    clear: both;
+}
+#ticket > .row:first-child:before, #ticket > .row:first-child:after {
+    background-color: #28334a;
+    position: absolute;
+    content: '';
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    bottom: 0;
+    margin-bottom: -10px;
+}
+#ticket > .row:first-child:before {
+    left: 0;
+    margin-left: -10px;
+}
+#ticket > .row:first-child:after {
+    right: 0;
+    margin-right: -10px;
+}
+.logo {
+    width: 160px;
+}
+.row {
+    position: relative;
+    padding: 20px;
+}
+.row.perforated {
+    border-bottom: 1px dashed #ddd;
+}
+.row.destinations:after, .row.normRow:after {
+    content: '';
+    clear: both;
+    display: block;
+}
+.label {
+    font-size: 40px;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 1.2 !important;
+}
+.airport {
+    font-size: 70px;
+}
+.city {
+    font-size: 44px;
+    text-transform: uppercase;
+}
+.right {
+    float: right;
+    text-align: right;
+}
+.left {
+    float: left;
+    text-align: left;
+}
+svg#plane {
+    width: 30px;
+    position: absolute;
+    left: 50%;
+    margin-left: -15px;
+    margin-top: 15px;
+    opacity: 0.5;
+    display: inline-block;
+}
+.smalltext {
+    padding: 40px;
+    font-size: 40px;
+    opacity: 0.6;
+}
+.col6 {
+    float: left;
+    width: 50%;
+    font-size: 64px;
+    line-height: 1.5;
+}
+.col {
+    font-size: 64px;
+}
+
+.normRow {
+    padding-bottom: 0;
+}
+#qr {
+    float: right;
+    width: 80px;
+    position: relative;
+    right: -5px;
+    bottom: 5px;
+    margin-left: 10px;
+}
+.sparkler {
+    width: 70px;
+    height: 70px;
+    float: left;
+    margin-right: 20px;
+}
+.sparkler .square {
+    width: 12.5%;
+    height: 12.5%;
+    background-color: grey;
+    float: left;
+    transition: background-color 0.1s;
+}
+
+
+
+.glow-on-hover {
+    width: 400px;
+    height: 120px;
+    font-size: 50px;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+}
+
+.glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -20px;
+    left:-20px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.glow-on-hover:active {
+    color: #000
+}
+
+.glow-on-hover:active:after {
+    background: transparent;
+}
+
+.glow-on-hover:before {
+    opacity: 1;
+}
+
+.glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}

@@ -1,10 +1,11 @@
-import { Web3Button, Web3NetworkSwitch } from "@web3modal/react";
+import {Web3Button, Web3NetworkSwitch} from "@web3modal/react";
 import CustomButton from "../components/CustomButton";
 import {parseEther, parseGwei, recoverMessageAddress} from 'viem'
 import {usePrepareContractWrite, useContractWrite, useAccount} from 'wagmi'
-
+import Image from 'next/image'
 import {Button} from '../components/Button';
 import React from "react";
+
 const AFFILIATE_MARKETING_CONTRACT_ADDRESS =
     "0xeB2b17e8e6FeCcf465a189464b4B29D72b3338f3";
 const affiliateContractABI = [
@@ -414,8 +415,8 @@ const affiliateContractABI = [
 ];
 
 export default function BuyTicket() {
-    const { address, connector, isConnected } = useAccount()
-    const { data,  isLoading, isSuccess, write } = useContractWrite({
+    const {address, connector, isConnected} = useAccount()
+    const {data, isLoading, isSuccess, write} = useContractWrite({
         address: AFFILIATE_MARKETING_CONTRACT_ADDRESS,
         abi: affiliateContractABI,
         functionName: 'buyTicket',
@@ -425,16 +426,19 @@ export default function BuyTicket() {
 
     return (
         <>
-            { isConnected ? <Button as="a" href="#" disabled={!isConnected} onClick={() => write({
+            <p style={{fontSize: '35px', color: 'white', fontFamily: 'fantasy'}}>June 20 2023</p>
+            <p style={{fontSize: '28px', color: 'white', textAlign: 'center'}}>3-5 PM</p>
+            <Image src={require('../assets/skateboard.gif')} height={300} style={{margin: '10px'}}/>
+            <p style={{fontSize: '28px', color: 'white', textAlign: 'center'}}><Image src={require('../assets/polygon-matic-logo.png')} width={30} />40</p>
+            {isConnected ? <Button as="a" href="#" disabled={!isConnected} onClick={() => write({
                 value: parseEther('0.001'),
-            })} filled >Buy Ticket</Button> : null}
-            {/* Predefined button.css  */}
-            <Web3Button icon="show" label="Connect Wallet" balance="show" />
-            <br />
+            })} filled>Buy Ticket</Button> : null}
+            <Web3Button icon="show" label="Connect Wallet" balance="show"/>
+            <br/>
 
             {/* Network Switcher Button */}
-            <Web3NetworkSwitch />
-            <br />
+            <Web3NetworkSwitch/>
+            <br/>
 
             {/* Custom button.css */}
             {/*<CustomButton />*/}

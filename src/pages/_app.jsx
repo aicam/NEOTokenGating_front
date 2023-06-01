@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { polygonMumbai } from "wagmi/chains";
 import "../styles.css";
+import "../assets/styles.css"
 import '../assets/button.css'
 // 1. Get projectID at https://cloud.walletconnect.com
 if (!process.env.NEXT_PUBLIC_PROJECT_ID) {
