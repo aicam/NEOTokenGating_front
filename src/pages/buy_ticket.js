@@ -17,8 +17,6 @@ export default function BuyTicket() {
         abi: affiliateContractABI,
         functionName: 'buyTicket',
     })
-    //
-    // const { write } = useContractWrite(config)
 
     return (
         <>
@@ -32,12 +30,8 @@ export default function BuyTicket() {
             <Web3Button icon="show" label="Connect Wallet" balance="show"/>
             <br/>
 
-            {/* Network Switcher Button */}
             <Web3NetworkSwitch/>
             <br/>
-
-            {/* Custom button.css */}
-            {/*<CustomButton />*/}
         </>
     );
 }
