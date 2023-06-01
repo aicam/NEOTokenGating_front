@@ -1,45 +1,77 @@
-import {Web3Button, Web3NetworkSwitch} from "@web3modal/react";
-import {parseEther, parseGwei, recoverMessageAddress} from 'viem'
-import {usePrepareContractWrite, useContractWrite, useAccount} from 'wagmi'
-import Image from 'next/image'
-import {Button} from '../components/Button';
-import React, {useEffect} from "react";
-import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
 
-import { useRouter } from 'next/router';
-import AffiliateMarketing from "../contracts/AffiliateMarketing";
+import { Web3Button, Web3NetworkSwitch } from "@web3modal/react";
+import { parseEther } from "viem";
+import { useContractWrite, useAccount } from "wagmi";
 
-const AFFILIATE_MARKETING_CONTRACT_ADDRESS = AffiliateMarketing.address;
-const affiliateContractABI = AffiliateMarketing.abi;
+import { Button } from "../components/Button";
+import { SETTINGS } from "../settings";
+import * as affiliateContractABI from "../assets/ABI/affiliateABI.json";
+import * as nftContractABI from "../assets/ABI/nftTicketABI.json";
 
 export default function BuyTicket() {
-    const {address, connector, isConnected} = useAccount()
-    const {data, isLoading, isSuccess, write} = useContractWrite({
-        address: AFFILIATE_MARKETING_CONTRACT_ADDRESS,
-        abi: affiliateContractABI,
-        functionName: 'buyTicket',
-    })
-    const router = useRouter();
-    const { from } = router.query;
+  const { address, connector, isConnected } = useAccount();
+  const { data, isLoading, isSuccess, write } = useContractWrite({
+    address: SETTINGS.DEFAULT_AFFILIATE_ADDRESS,
+    abi: affiliateContractABI,
+    functionName: "buyTicket",
+  });
+  const router = useRouter();
+  const { from } = router.query;
 
-    useEffect(() => {
-        console.log('keywords here ', from)
-    }, [from])
+  useEffect(() => {
+    console.log("keywords here ", from);
+  }, [from]);
 
-    return (
-        <>
-            <p className="colorful-text" style={{fontSize: '35px', color: 'white', fontFamily: 'fantasy'}}>June 20 2023</p>
-            <p style={{fontSize: '28px', marginTop: '-20px', color: 'white', textAlign: 'center'}}>3-5 PM</p>
-            <Image src={require('../assets/skateboard.gif')} height={300} style={{margin: '10px'}}/>
-            <p style={{fontSize: '28px', color: 'white', textAlign: 'center'}}><Image src={require('../assets/polygon-matic-logo.png')} width={30} />40</p>
-            {isConnected ? <Button as="a" href="#" disabled={!isConnected} onClick={() => write({
-                value: parseEther('0.001'),
-            })} filled>Buy Ticket</Button> : null}
-            <Web3Button icon="show" label="Connect Wallet" balance="show"/>
-            <br/>
+  return (
+    <>
+      <p
+        className="colorful-text"
+        style={{ fontSize: "35px", color: "white", fontFamily: "fantasy" }}
+      >
+        June 20 2023
+      </p>
+      <p
+        style={{
+          fontSize: "28px",
+          marginTop: "-20px",
+          color: "white",
+          textAlign: "center",
+        }}
+      >
+        3-5 PM
+      </p>
+      <Image
+        src={require("../assets/skateboard.gif")}
+        height={300}
+        style={{ margin: "10px" }}
+      />
+      <p style={{ fontSize: "28px", color: "white", textAlign: "center" }}>
+        <Image src={require("../assets/polygon-matic-logo.png")} width={30} />
+        40
+      </p>
+      {isConnected ? (
+        <Button
+          as="a"
+          href="#"
+          disabled={!isConnected}
+          onClick={() =>
+            write({
+              value: parseEther("0.001"),
+            })
+          }
+          filled
+        >
+          Buy Ticket
+        </Button>
+      ) : null}
+      <Web3Button icon="show" label="Connect Wallet" balance="show" />
+      <br />
 
-            <Web3NetworkSwitch/>
-            <br/>
-        </>
-    );
+      <Web3NetworkSwitch />
+      <br />
+    </>
+  );
 }
