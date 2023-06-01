@@ -1,8 +1,10 @@
 import { Web3Button, Web3NetworkSwitch } from "@web3modal/react";
 import CustomButton from "../components/CustomButton";
 import {parseEther, parseGwei, recoverMessageAddress} from 'viem'
-import { usePrepareContractWrite, useContractWrite } from 'wagmi'
+import {usePrepareContractWrite, useContractWrite, useAccount} from 'wagmi'
 
+import {Button} from '../components/Button';
+import React from "react";
 const AFFILIATE_MARKETING_CONTRACT_ADDRESS =
     "0xeB2b17e8e6FeCcf465a189464b4B29D72b3338f3";
 const affiliateContractABI = [
@@ -412,7 +414,7 @@ const affiliateContractABI = [
 ];
 
 export default function BuyTicket() {
-
+    const { address, connector, isConnected } = useAccount()
     const { data,  isLoading, isSuccess, write } = useContractWrite({
         address: AFFILIATE_MARKETING_CONTRACT_ADDRESS,
         abi: affiliateContractABI,
@@ -423,12 +425,10 @@ export default function BuyTicket() {
 
     return (
         <>
-            <button disabled={!write} onClick={() => write({
+            { isConnected ? <Button as="a" href="#" disabled={!isConnected} onClick={() => write({
                 value: parseEther('0.001'),
-            })}>
-                Buy Ticket
-            </button>
-            {/* Predefined button  */}
+            })} filled >Buy Ticket</Button> : null}
+            {/* Predefined button.css  */}
             <Web3Button icon="show" label="Connect Wallet" balance="show" />
             <br />
 
@@ -436,8 +436,8 @@ export default function BuyTicket() {
             <Web3NetworkSwitch />
             <br />
 
-            {/* Custom button */}
-            <CustomButton />
+            {/* Custom button.css */}
+            {/*<CustomButton />*/}
         </>
     );
 }
