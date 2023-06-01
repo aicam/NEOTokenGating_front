@@ -2,12 +2,7 @@
     box-sizing: border-box;
     user-select: none;
 }
-html, body {
-    background: #28334a;
-    min-height: 100vh;
-    min-width: 100vw;
-    font-family: -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
-}
+
 .feedback {
     width: 100vw;
     height: 100vh;
@@ -200,4 +195,32 @@ svg#plane {
     0% { background-position: 0 0; }
     50% { background-position: 400% 0; }
     100% { background-position: 0 0; }
+}
+
+
+.colorful-text {
+    padding: 20px;
+    font-family: sans-serif;
+    text-align: center;
+    color: #ffffff;
+    background-color: #000000;
+    animation: colorful-text 10s infinite linear;
+}
+
+@keyframes colorful-text {
+    0% {
+        background-color: #000000;
+    }
+    25% {
+        background-color: #ff0000;
+    }
+    50% {
+        background-color: #00ff00;
+    }
+    75% {
+        background-color: #0000ff;
+    }
+    100% {
+        background-color: #000000;
+    }
 }
