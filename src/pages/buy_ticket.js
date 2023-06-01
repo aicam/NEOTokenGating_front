@@ -3,7 +3,10 @@ import {parseEther, parseGwei, recoverMessageAddress} from 'viem'
 import {usePrepareContractWrite, useContractWrite, useAccount} from 'wagmi'
 import Image from 'next/image'
 import {Button} from '../components/Button';
-import React from "react";
+import React, {useEffect} from "react";
+import Link from "next/link";
+
+import { useRouter } from 'next/router';
 import AffiliateMarketing from "../contracts/AffiliateMarketing";
 
 const AFFILIATE_MARKETING_CONTRACT_ADDRESS = AffiliateMarketing.address;
@@ -16,6 +19,12 @@ export default function BuyTicket() {
         abi: affiliateContractABI,
         functionName: 'buyTicket',
     })
+    const router = useRouter();
+    const { from } = router.query;
+
+    useEffect(() => {
+        console.log('keywords here ', from)
+    }, [from])
 
     return (
         <>
