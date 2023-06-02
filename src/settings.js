@@ -17,11 +17,9 @@ class Settings {
       JSON.parse(process.env.NEXT_PUBLIC_DEFAULT_AFFILIATE_ADDRESSES),
       "NEXT_PUBLIC_DEFAULT_AFFILIATE_ADDRESSES"
     );
-    this.NFT_ADDRESSES = this.#checkListOfEthereumAddresses(
-      JSON.parse(process.env.NEXT_PUBLIC_NFT_ADDRESSES),
-      "NEXT_PUBLIC_NFT_ADDRESSES"
-    );
+
     this.#validateEnvParams();
+    this.CONTRACT_ADDRESSES_BY_NETWORK = this.#createContractLists();
   }
   #checkListOfEthereumAddresses(listOfAddresses, configCheckName) {
     listOfAddresses.forEach((ethereumAddress) => {
@@ -47,11 +45,6 @@ class Settings {
         "invalid NEXT_PUBLIC_DEFAULT_AFFILIATE_ADDRESS count. it must be same count as NEXT_PUBLIC_CHAINS_LIST"
       );
     }
-    if (this.CHAINS_LIST.length != this.NFT_ADDRESSES.length) {
-      throw new Error(
-        "invalid NEXT_PUBLIC_NFT_ADDRESS count. it must be same count as NEXT_PUBLIC_CHAINS_LIST"
-      );
-    }
   }
   #validateAcceptedChainsForTestNet(chainsList) {
     chainsList.forEach((chain) => {
@@ -69,6 +62,20 @@ class Settings {
       polygon: "polygonMumbai",
       mainnet: "sepolia",
     };
+  }
+  #createContractLists() {
+    let contractByNetwork = {};
+    for (let index = 0; index < this.CHAINS_LIST.length; index++) {
+      if (this.IS_ON_MAINNET) {
+        contractByNetwork[this.CHAINS_LIST[index]] =
+          this.DEFAULT_AFFILIATE_ADDRESSES[index];
+      } else {
+        contractByNetwork[this.TESTNET_KEYS[this.CHAINS_LIST[index]]] =
+          this.DEFAULT_AFFILIATE_ADDRESSES[index];
+      }
+    }
+
+    return contractByNetwork;
   }
 }
 export const SETTINGS = new Settings();

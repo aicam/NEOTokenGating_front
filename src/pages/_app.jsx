@@ -5,6 +5,7 @@ import { WagmiConfig } from "wagmi";
 
 import { wConfig, ethereumClient, projectId } from "../web3_core/wagamiConfigs";
 
+import "react-toastify/dist/ReactToastify.css";
 import "../styles.css";
 import "../assets/styles.css";
 import "../assets/button.css";
