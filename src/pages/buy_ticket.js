@@ -8,10 +8,20 @@ import { useAccount } from "wagmi";
 
 import { Button } from "../components/Button";
 import { SETTINGS } from "../settings";
+import * as allChains from "wagmi/chains";
+
 import { AffiliateContract } from "../web3_core/affiliateContract";
 //==================
 
 export default function BuyTicket() {
+  //======================================
+  console.log("-----------------------------------");
+  console.log(SETTINGS.CHAINS_LIST);
+  console.log("-----------------------------------");
+  // const kir = Object.fromEntries(
+  //   Object.entries(allChains).filter(([key]) => key.includes("Name"))
+  // );
+  //======================================
   const { address, connector, isConnected } = useAccount();
 
   const [loadingRequirements, setLoadingRequirements] = useState(false);
