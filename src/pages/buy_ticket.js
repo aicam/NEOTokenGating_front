@@ -4,25 +4,25 @@ import Image from "next/image";
 
 import { Web3Button, Web3NetworkSwitch } from "@web3modal/react";
 import { parseEther } from "viem";
-import { useContractWrite, useAccount } from "wagmi";
+import { useAccount } from "wagmi";
 
 import { Button } from "../components/Button";
 import { SETTINGS } from "../settings";
-import * as affiliateContractABI from "../assets/ABI/affiliateABI.json";
-import * as nftContractABI from "../assets/ABI/nftTicketABI.json";
+import { AffiliateContract } from "../web3_core/affiliateContract";
+//==================
 
 export default function BuyTicket() {
   const { address, connector, isConnected } = useAccount();
-  const { data, isLoading, isSuccess, write } = useContractWrite({
-    address: SETTINGS.DEFAULT_AFFILIATE_ADDRESS,
-    abi: affiliateContractABI,
-    functionName: "buyTicket",
-  });
+
+  const [loadingRequirements, setLoadingRequirements] = useState(false);
   const router = useRouter();
   const { from } = router.query;
 
+  async function Kir(params) {
+    console.log(params);
+  }
   useEffect(() => {
-    console.log("keywords here ", from);
+    setLoadingRequirements(true);
   }, [from]);
 
   return (

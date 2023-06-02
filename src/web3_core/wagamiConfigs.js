@@ -9,7 +9,8 @@ import { configureChains, createConfig } from "wagmi";
 import { SETTINGS } from "../settings";
 
 // 2. Configure wagmi client
-const chains = [SETTINGS.IS_ON_POLYGON_MAINNET ? polygon : polygonMumbai];
+// TODO: DELETE chains from here -> src/web3_core/chains.js
+const chains = [SETTINGS.IS_ON_MAINNET ? polygon : polygonMumbai];
 
 export const projectId = SETTINGS.WALLET_CONNECT_TOKEN;
 
