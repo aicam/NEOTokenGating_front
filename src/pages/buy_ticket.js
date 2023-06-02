@@ -15,12 +15,7 @@ import { AffiliateContract } from "../web3_core/affiliateContract";
 
 export default function BuyTicket() {
   //======================================
-  console.log("-----------------------------------");
-  console.log(SETTINGS.CHAINS_LIST);
-  console.log("-----------------------------------");
-  // const kir = Object.fromEntries(
-  //   Object.entries(allChains).filter(([key]) => key.includes("Name"))
-  // );
+
   //======================================
   const { address, connector, isConnected } = useAccount();
 

@@ -8,23 +8,10 @@ import { wConfig, ethereumClient, projectId } from "../web3_core/wagamiConfigs";
 import "../styles.css";
 import "../assets/styles.css";
 import "../assets/button.css";
-//========
 
-import { configureChains } from "wagmi";
-import * as allChains from "@wagmi/chains";
-import { publicProvider } from "wagmi/providers/public";
-//===========
 // 4. Wrap your app with WagmiProvider and add <Web3Modal /> component
 export default function App({ Component, pageProps }) {
   const [ready, setReady] = useState(false);
-
-  const kirekhar = configureChains(
-    [allChains.mainnet, allChains.avalanche],
-    [publicProvider()]
-  );
-
-  //{ data, isLoading, isSuccess, write }
-  console.log("kirekharkirekharkirekhar", allChains);
 
   useEffect(() => {
     setReady(true);

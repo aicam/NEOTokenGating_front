@@ -1,9 +1,13 @@
 import { isAddress } from "viem";
 class Settings {
   constructor() {
-    this.testNetsName = this.#getTestNetsList();
     this.WALLET_CONNECT_TOKEN = process.env.NEXT_PUBLIC_WALLET_CONNECT_TOKEN;
     this.CHAINS_LIST = JSON.parse(process.env.NEXT_PUBLIC_CHAINS_LIST);
+    this.TESTNET_KEYS = Object.fromEntries(
+      Object.entries(this.#getTestNetsList()).filter(([key]) =>
+        this.CHAINS_LIST.includes(key)
+      )
+    );
     this.IS_ON_MAINNET =
       process.env.NEXT_PUBLIC_IS_ON_MAINNET?.toLowerCase?.() === "true";
     if (!this.IS_ON_MAINNET) {
@@ -51,7 +55,7 @@ class Settings {
   }
   #validateAcceptedChainsForTestNet(chainsList) {
     chainsList.forEach((chain) => {
-      if (!(chain in this.testNetsName)) {
+      if (!(chain in this.TESTNET_KEYS)) {
         throw new Error(`${chain} Test Net is not supported.`);
       }
     });
