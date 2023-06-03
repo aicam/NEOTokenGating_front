@@ -205,11 +205,10 @@ export default function BuyTicket() {
                         alt="NFT image"
                     />
                 </div>
-                <p style={{fontSize: "42px", color: "white", textAlign: "center"}}>
+                <p style={{fontSize: "42px", color: "white", textAlign: "center"}} className={slackey.className}>
                     <img
                         src="https://neofileservice.s3.us-west-1.amazonaws.com/usdt.png"
                         width={30}
-                        className={slackey.className}
                     />
                     40
                 </p>
