@@ -319,11 +319,7 @@ p {
     transition: color 1s;
 }
 
-.card:hover:before,
-.card:hover:after {
-    animation: none;
-    opacity: 0;
-}
+
 
 .card::before {
     content: "";
