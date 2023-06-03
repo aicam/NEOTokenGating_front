@@ -1,52 +1,33 @@
-import {
-  EthereumClient,
-  w3mConnectors,
-  w3mProvider,
-} from "@web3modal/ethereum";
-import { Web3Modal } from "@web3modal/react";
-import { useEffect, useState } from "react";
-import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { polygonMumbai } from "wagmi/chains";
+import {useEffect, useState} from "react";
+
+import {Web3Modal} from "@web3modal/react";
+import {WagmiConfig} from "wagmi";
+
+import {wConfig, ethereumClient, projectId} from "../web3_core/wagamiConfigs";
+
+import "react-toastify/dist/ReactToastify.css";
 import "../styles.css";
-import "../assets/styles.css"
-import '../assets/button.css'
-// 1. Get projectID at https://cloud.walletconnect.com
-if (!process.env.NEXT_PUBLIC_PROJECT_ID) {
-  throw new Error("You need to provide NEXT_PUBLIC_PROJECT_ID env variable");
-}
-const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
+import "../assets/styles.css";
+import "../assets/button.css";
+import "../assets/styles.scss"
 
-// 2. Configure wagmi client
-const chains = [polygonMumbai];
+// 4. Wrap your app with WagmiProvider and add <Web3Modal /> component
+export default function App({Component, pageProps}) {
+    const [ready, setReady] = useState(false);
 
-const { publicClient } = configureChains(chains, [w3mProvider({ projectId })]);
-const wagmiConfig = createConfig({
-  autoConnect: true,
-  connectors: w3mConnectors({ version: 1, chains, projectId }),
-  publicClient,
-});
+    useEffect(() => {
+        setReady(true);
+    }, []);
 
-// 3. Configure modal ethereum client
-const ethereumClient = new EthereumClient(wagmiConfig, chains);
+    return (
+        <>
+            {ready ? (
+                <WagmiConfig config={wConfig}>
+                        <Component {...pageProps} />
+                </WagmiConfig>
+            ) : null}
 
-// 4. Wrap your app with WagmiProvider and add <Web3Modal /> compoennt
-export default function App({ Component, pageProps }) {
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    setReady(true);
-  }, []);
-
-
-  return (
-    <>
-      {ready ? (
-        <WagmiConfig config={wagmiConfig}>
-          <Component {...pageProps} />
-        </WagmiConfig>
-      ) : null}
-
-      <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
-    </>
-  );
+            <Web3Modal projectId={projectId} ethereumClient={ethereumClient}/>
+        </>
+    );
 }
