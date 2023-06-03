@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Image from "next/image";
-
+import {Pacifico, Slackey} from "next/font/google";
 import {Web3Button, Web3NetworkSwitch} from "@web3modal/react";
 import {parseEther} from "viem";
 import {
@@ -18,6 +18,8 @@ import {ChainsListHandler} from "../web3_core/chains";
 import * as ACABI from "../assets/ABI/affiliateABI.json";
 //==================
 const affiliateContractABI = ACABI.abi;
+const pacifico = Pacifico({ subsets: ['latin'], weight: '400' });
+const slackey = Slackey({subsets: ['latin'], weight: '400'})
 export default function BuyTicket() {
     const [canBuy, setCanBuy] = useState(false);
     const [connectedAccountAddress, setConnectedAccountAddress] = useState("");
@@ -118,6 +120,11 @@ export default function BuyTicket() {
         },
     });
 
+    useEffect(() => {
+        if (buyTicketContractFunc.error?.message)
+            toast.error(buyTicketContractFunc.error.message.slice(0,200) + '...')
+    }, [buyTicketContractFunc.error])
+
     const validateSelectedChainAndConfigureBuySettings = (
         chain,
         updatedAccountAddress
@@ -157,6 +164,7 @@ export default function BuyTicket() {
             value: retrievedDataFromSmartContract.ticketPrice,
         });
     };
+
     return (
         <>
             <ToastContainer
@@ -174,7 +182,7 @@ export default function BuyTicket() {
             <div className="card">
                 <p
                     className="colorful-text"
-                    style={{fontSize: "28px", color: "white"}}
+                    style={{fontSize: "28px", color: "white", fontFamily: pacifico.style.fontFamily}}
                 >
                     June 20 2023
                 </p>
@@ -201,7 +209,7 @@ export default function BuyTicket() {
                     <img
                         src="https://neofileservice.s3.us-west-1.amazonaws.com/usdt.png"
                         width={30}
-                        alt="sss"
+                        className={slackey.className}
                     />
                     40
                 </p>
@@ -263,18 +271,18 @@ export default function BuyTicket() {
                 </div>
 
                 <br/>
-                {buyTicketContractFunc.error ? (
-                    <p
-                        style={{
-                            fontSize: "28px",
-                            marginTop: "-20px",
-                            color: "white",
-                            textAlign: "center",
-                        }}
-                    >
-                        error: {buyTicketContractFunc.error.message}
-                    </p>
-                ) : null}
+                {/*{buyTicketContractFunc.error ? (*/}
+                {/*    <p*/}
+                {/*        style={{*/}
+                {/*            fontSize: "28px",*/}
+                {/*            marginTop: "-20px",*/}
+                {/*            color: "white",*/}
+                {/*            textAlign: "center",*/}
+                {/*        }}*/}
+                {/*    >*/}
+                {/*        error: {buyTicketContractFunc.error.message}*/}
+                {/*    </p>*/}
+                {/*) : null}*/}
                 <br/>
                 {buyTicketContractFunc.isSuccess ? (
                     <p
