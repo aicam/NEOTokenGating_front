@@ -7,6 +7,14 @@ export class ChainsListHandler {
   constructor() {
     this.chainsId = {};
     this.SELECTED_CHAINS = this.#createChainsArrayFromSettings();
+    this.DEFAULT_CHAIN = this.#selectDefaultChain(this.SELECTED_CHAINS);
+  }
+  #selectDefaultChain(filteredChains) {
+    let firstIndexedKey = Object.keys(filteredChains)[0];
+    return {
+      chain: filteredChains[firstIndexedKey],
+      chainKey: firstIndexedKey,
+    };
   }
   #createChainsArrayFromSettings() {
     if (SETTINGS.IS_ON_MAINNET) {
