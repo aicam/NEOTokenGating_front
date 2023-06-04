@@ -18,7 +18,7 @@ import {ChainsListHandler} from "../web3_core/chains";
 import * as ACABI from "../assets/ABI/affiliateABI.json";
 //==================
 const affiliateContractABI = ACABI.abi;
-const pacifico = Pacifico({ subsets: ['latin'], weight: '400' });
+const pacifico = Pacifico({subsets: ['latin'], weight: '400'});
 const slackey = Slackey({subsets: ['latin'], weight: '400'})
 export default function BuyTicket() {
     const [canBuy, setCanBuy] = useState(false);
@@ -29,6 +29,7 @@ export default function BuyTicket() {
     const [buyTicketTransactionHash, setBuyTicketTransactionHash] =
         useState(null);
     const [blockExplorerUrl, setBlockExplorerUrl] = useState("");
+    // TODO: set user ticket balance 1 if has it
     const [userTicketBalance, setUserTicketBalance] = useState(0);
     const validChains = new ChainsListHandler();
 
@@ -122,7 +123,7 @@ export default function BuyTicket() {
 
     useEffect(() => {
         if (buyTicketContractFunc.error?.message)
-            toast.error(buyTicketContractFunc.error.message.slice(0,200) + '...')
+            toast.error(buyTicketContractFunc.error.message.slice(0, 200) + '...')
     }, [buyTicketContractFunc.error])
 
     const validateSelectedChainAndConfigureBuySettings = (
@@ -227,29 +228,40 @@ export default function BuyTicket() {
                 <div className="div-center">
                     <Web3Button icon="show" label="Connect Wallet" balance="show"/>
                 </div>
-                {canBuy ? (
-                    !buyTicketContractFunc.isLoading ? (
-                        <div className="div-center">
-                            <Button as="a" href="#" onClick={buyTicket} filled>
-                                Buy ticket
-                            </Button>
-                        </div>
-                    ) : (
-                        <Button as="a" href="#" disabled={true} filled>
-                            waiting for the results
-                        </Button>
-                    )
-                ) : connectedAccountAddress ? (
-                    <h2
-                        style={{
-                            fontSize: "28px",
-                            color: "white",
-                            textAlign: "center",
-                        }}
-                    >
-                        Please select a valid network from below.
-                    </h2>
-                ) : null}
+                {
+                    userTicketBalance === 0 ?
+                        <>
+                            <h3 className="got-ticket-h" style={{fontFamily: pacifico.style.fontFamily}}>You got your
+                                ticket!</h3>
+                            <h3 className="got-ticket-h" style={{fontFamily: pacifico.style.fontFamily}}>
+                                {retrievedDataFromSmartContract?.nftAddress?.slice(0, 8)}</h3>
+                        </>
+                        :
+                        canBuy ? (
+                            !buyTicketContractFunc.isLoading ? (
+                                <div className="div-center">
+                                    <Button as="a" href="#" onClick={buyTicket} filled>
+                                        Buy ticket
+                                    </Button>
+                                </div>
+                            ) : (
+                                <div className="div-center">
+                                    <Button as="a" href="#" disabled={true} filled>
+                                        Confirm the smart contract
+                                    </Button>
+                                </div>
+                            )
+                        ) : connectedAccountAddress ? (
+                            <h2
+                                style={{
+                                    fontSize: "28px",
+                                    color: "white",
+                                    textAlign: "center",
+                                }}
+                            >
+                                Please select a valid network from below.
+                            </h2>
+                        ) : null}
                 {buyTicketTransactionHash ? (
                     <a
                         style={{
