@@ -12,6 +12,7 @@ import { SETTINGS } from "../settings";
 import { ChainsListHandler } from "../web3_core/chains";
 import affiliateContractABI from "../assets/ABI/affiliateABI.json";
 import erc20ABI from "../assets/ABI/erc20ABI.json";
+import Modal from "../components/Modal";
 //==================
 
 const pacifico = Pacifico({ subsets: ["latin"], weight: "400" });
@@ -35,6 +36,7 @@ export default function BuyTicket() {
   // TODO: set user ticket balance 1 if has it
   const [userTicketBalance, setUserTicketBalance] = useState(0);
   const validChains = new ChainsListHandler();
+  const [showModal, setShowModal] = useState(false);
 
   //======================Contract Hooks
   const buyTicketContractFunc = useContractWrite({
@@ -60,6 +62,7 @@ export default function BuyTicket() {
     },
     onError(error) {
       setRetrievedDataState(retrievedDataState + 1);
+      toast.error(error.toString().slice(0, 100) + '...')
     },
     onSuccess(data) {
       setRetrievedDataState(retrievedDataState + 1);
@@ -323,7 +326,12 @@ export default function BuyTicket() {
         <div className="div-center">
           <Web3Button icon="show" label="Connect Wallet" balance="show" />
         </div>
-        {userTicketBalance === 0 ? (
+        <div className="div-center">
+          <Button as="a" href="#" onClick={() => setShowModal(true)}>
+            Help
+          </Button>
+        </div>
+        {userTicketBalance === 1 ? (
           <>
             <h3
               className="got-ticket-h"
@@ -339,7 +347,7 @@ export default function BuyTicket() {
             </h3>
           </>
         ) : canBuy ? (
-          retrievedDataFromSmartContract.approvedForTransaction ? (
+          retrievedDataFromSmartContract?.approvedForTransaction ? (
             !buyTicketContractFunc.isLoading ? (
               <div className="div-center">
                 <Button as="a" href="#" onClick={buyTicket} filled>
@@ -360,17 +368,16 @@ export default function BuyTicket() {
               </Button>
             </div>
           )
-        ) : connectedAccountAddress ? (
+        ) :
           <h2
             style={{
-              fontSize: "28px",
-              color: "white",
-              textAlign: "center",
+              fontFamily: slackey.style.fontFamily
             }}
+            className="select-chain"
           >
             Please select a valid network from below.
           </h2>
-        ) : null}
+        }
         {buyTicketTransactionHash ? (
           <a
             style={{
@@ -414,6 +421,11 @@ export default function BuyTicket() {
             Transaction finished successfully.
           </p>
         ) : null}
+        {showModal &&
+            <Modal onClose={() => setShowModal(false)}>
+              Hello from the modal!
+            </Modal>
+        }
       </div>
     </>
   );

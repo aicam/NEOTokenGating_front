@@ -10,6 +10,7 @@ import "../styles.css";
 import "../assets/styles.css";
 import "../assets/button.css";
 import "../assets/styles.scss"
+import "../assets/modal.css"
 
 // 4. Wrap your app with WagmiProvider and add <Web3Modal /> component
 export default function App({Component, pageProps}) {
