@@ -1,7 +1,8 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import {Pacifico} from "next/font/google";
 
-const Modal = ({ onClose }) => {
+const pacifico = Pacifico({subsets: ["latin"], weight: "400"});
+const Modal = ({onClose, children, title}) => {
     const handleCloseClick = (e) => {
         e.preventDefault();
         onClose();
@@ -16,8 +17,10 @@ const Modal = ({ onClose }) => {
                             x
                         </a>
                     </div>
-                    <h1 style={{color: 'black'}}>Welcome</h1>
-                    <div className="modal-body">asdasdasd</div>
+                    <h1 style={{color: 'black', fontFamily: pacifico.style.fontFamily, margin: 0, padding: 0}}>{title}</h1>
+                    <div className="modal-body">
+                        {children}
+                    </div>
                 </div>
             </div>
         </div>
