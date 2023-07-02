@@ -272,7 +272,7 @@ export default function BuyTicket() {
                         fontFamily: pacifico.style.fontFamily,
                     }}
                 >
-                    June 20 2023
+                    August 31, 2023
                 </p>
                 <h3 className="h3-kablammo">Barcelona</h3>
                 <p
@@ -283,15 +283,12 @@ export default function BuyTicket() {
                         textAlign: "center",
                     }}
                 >
-                    Carrer d'en Gignàs, 43, 3-5 PM
+                    204 S College Ave, Fort Collins, CO, 8 PM
                 </p>
                 <div className="div-nft-card">
-                    <Image
-                        src={require("../assets/skateboard.gif")}
-                        className="image-center"
-                        width={300}
-                        alt="NFT image"
-                    />
+                    <iframe src="https://giphy.com/embed/lmjzmEcZLkcMLtVrWi" width="480" height="270" frameBorder="0"
+                            className="giphy-embed" allowFullScreen></iframe>
+
                 </div>
                 <p
                     style={{fontSize: "42px", color: "white", textAlign: "center"}}
