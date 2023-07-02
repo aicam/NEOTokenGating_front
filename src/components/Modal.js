@@ -17,7 +17,7 @@ const Modal = ({onClose, children, title}) => {
                             x
                         </a>
                     </div>
-                    <h1 style={{color: 'black', fontFamily: pacifico.style.fontFamily, margin: 0, padding: 0}}>{title}</h1>
+                    <h1 style={{color: 'black', margin: 0, padding: 0}}>{title}</h1>
                     <div className="modal-body">
                         {children}
                     </div>
