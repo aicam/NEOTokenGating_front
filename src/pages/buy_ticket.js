@@ -274,7 +274,7 @@ export default function BuyTicket() {
                 >
                     August 31, 2023
                 </p>
-                <h3 className="h3-kablammo">Barcelona</h3>
+                <h3 className="h3-kablammo">Fort Collins, CO</h3>
                 <p
                     style={{
                         fontSize: "20px",
@@ -283,7 +283,7 @@ export default function BuyTicket() {
                         textAlign: "center",
                     }}
                 >
-                    204 S College Ave, Fort Collins, CO, 8 PM
+                    204 S College Ave, 8 PM
                 </p>
                 <div className="div-nft-card">
                     <iframe src="https://giphy.com/embed/lmjzmEcZLkcMLtVrWi" width="480" height="270" frameBorder="0"
