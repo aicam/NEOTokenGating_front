@@ -1,5 +1,4 @@
 import React from "react";
-import {Pacifico} from "next/font/google";
 
 
 const Modal = ({onClose, children, title}) => {
