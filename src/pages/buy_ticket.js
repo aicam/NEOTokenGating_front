@@ -269,7 +269,6 @@ export default function BuyTicket() {
                     style={{
                         fontSize: "28px",
                         color: "white",
-                        fontFamily: pacifico.style.fontFamily,
                     }}
                 >
                     August 31, 2023

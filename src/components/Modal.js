@@ -1,7 +1,7 @@
 import React from "react";
 import {Pacifico} from "next/font/google";
 
-const pacifico = Pacifico({subsets: ["latin"], weight: "400"});
+
 const Modal = ({onClose, children, title}) => {
     const handleCloseClick = (e) => {
         e.preventDefault();
