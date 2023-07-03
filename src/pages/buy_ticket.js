@@ -286,8 +286,10 @@ export default function BuyTicket() {
                     204 S College Ave, 8 PM
                 </p>
                 <div className="div-nft-card">
-                    <iframe src="https://giphy.com/embed/lmjzmEcZLkcMLtVrWi" width="480" height="270" frameBorder="0"
-                            className="giphy-embed" allowFullScreen></iframe>
+                    <img
+                        src={'https://www.edmtunes.com/wp-content/uploads/2021/04/hexagonia.jpg'}
+                        height={'200px'}
+                    />
 
                 </div>
                 <p
